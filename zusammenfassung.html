@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Elektrotechnik I — Zusammenfassung</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<style>
+@page { size: A4; margin: 22mm 18mm 20mm; }
+@page { @bottom-center { content: counter(page); font-family: Georgia, serif; font-size: 9pt; color: #888; } }
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 10.8pt;
+  line-height: 1.5;
+  color: #1c2128;
+  background:#fff;
+}
+.cover{
+  min-height: 235mm;
+  display:flex; flex-direction:column; justify-content:center;
+  page-break-after: always;
+}
+.cover .kicker{ font-family: Arial, sans-serif; font-size:11pt; letter-spacing:.15em; text-transform:uppercase; color:#8a5a00; font-weight:700; }
+.cover h1{ font-size:34pt; margin:8px 0 4px; letter-spacing:-.01em; }
+.cover .sub{ font-size:14pt; color:#4a5568; margin-bottom: 30px; }
+.cover .meta{ font-family: Arial, sans-serif; font-size:9.5pt; color:#71808f; border-top:1px solid #dbe1e7; padding-top:14px; margin-top:10px; max-width:340px; }
+.cover .rule{ width:60px; height:3px; background:#c2650c; margin:18px 0 26px; }
+
+.toc{ page-break-after: always; }
+.toc h2{ font-family: Arial, sans-serif; font-size:13pt; text-transform:uppercase; letter-spacing:.08em; color:#4a5568; border-bottom:1px solid #dbe1e7; padding-bottom:8px; }
+.toc ol{ list-style:none; padding:0; margin:14px 0; counter-reset: item; }
+.toc li{ display:flex; justify-content:space-between; padding:5px 0; font-size:11pt; }
+.toc li a{ color:#1c2128; text-decoration:none; }
+.toc li .n{ color:#c2650c; font-weight:700; display:inline-block; min-width:22px; }
+.toc li.sub{ padding-left: 26px; font-size:10pt; color:#4a5568; }
+
+h2{
+  font-family: Arial, sans-serif; font-size: 16pt; margin: 0 0 4px; padding-top: 4mm;
+  border-bottom: 2px solid #1c2128; padding-bottom:6px;
+}
+h2 .n{ color:#c2650c; margin-right:8px; }
+h3{ font-family: Arial, sans-serif; font-size: 12pt; margin: 18px 0 6px; color:#2d3748; }
+h3 .n{ color:#c2650c; margin-right:6px; }
+p{ margin: 6px 0 10px; text-align: justify; }
+.chapter-intro{ color:#4a5568; font-size:10pt; font-style:italic; margin-bottom:14px; }
+section.chapter{ page-break-before: always; }
+
+.fbox{
+  border:1px solid #d6dbe1; border-left:4px solid #c2650c; border-radius:4px;
+  background:#fafafa; padding:9px 14px 11px; margin:10px 0;
+  page-break-inside: avoid;
+}
+.fbox-title{ font-family: Arial, sans-serif; font-weight:700; font-size:9.5pt; text-transform:uppercase; letter-spacing:.04em; color:#8a5a00; margin-bottom:4px; }
+.fbox .vars{ font-family: Arial, sans-serif; font-size:8.7pt; color:#5a6472; margin-top:5px; line-height:1.45; }
+.fbox .vars b{ color:#2d3748; }
+.fgrid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+.fgrid .fbox{ margin:0; }
+@media print { .fgrid{ display:grid; } }
+
+.intuition{
+  background:#eef6fb; border:1px solid #cfe4f0; border-radius:4px;
+  padding:9px 14px; margin:10px 0; font-size:10.2pt;
+  page-break-inside: avoid;
+}
+.intuition .lbl{ font-family: Arial, sans-serif; font-weight:700; font-size:9pt; text-transform:uppercase; letter-spacing:.04em; color:#0a6a8f; margin-bottom:3px; }
+.intuition p{ margin:4px 0; text-align:left; }
+
+.merke{
+  background:#fff8ea; border:1px solid #f0dca3; border-left:4px solid #b45309; border-radius:4px;
+  padding:9px 14px; margin:10px 0; font-size:10.2pt;
+  page-break-inside: avoid;
+}
+.merke .lbl{ font-family: Arial, sans-serif; font-weight:700; font-size:9pt; text-transform:uppercase; letter-spacing:.04em; color:#b45309; margin-bottom:3px; }
+.merke p{ margin:4px 0; text-align:left; }
+
+.example{
+  background:#f2f9f4; border:1px solid #c9e6d1; border-radius:4px;
+  padding:9px 14px 11px; margin:10px 0; font-size:10.1pt;
+  page-break-inside: avoid;
+}
+.example .lbl{ font-family: Arial, sans-serif; font-weight:700; font-size:9pt; text-transform:uppercase; letter-spacing:.04em; color:#15803d; margin-bottom:4px; }
+.example ol{ margin:5px 0 4px; padding-left:20px; }
+.example li{ margin-bottom:3px; }
+.example .res{ font-weight:700; margin-top:4px; }
+
+table.ktable{ border-collapse:collapse; width:100%; font-size:9.6pt; margin:8px 0; }
+table.ktable th, table.ktable td{ border:1px solid #d6dbe1; padding:5px 8px; text-align:left; }
+table.ktable th{ background:#f2f3f5; font-family:Arial,sans-serif; font-size:8.8pt; text-transform:uppercase; letter-spacing:.03em; }
+
+.katex-display{ margin: 4px 0 !important; }
+.katex{ font-size: 1.03em; }
+ul.compact{ margin:4px 0; padding-left:20px; }
+ul.compact li{ margin-bottom:3px; }
+.note{ font-size:9pt; color:#8a8f99; font-style:italic; }
+strong{ color:#111; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">PVK-Begleitheft</div>
+  <h1>Elektrotechnik I</h1>
+  <div class="sub">Zusammenfassung mit Formeln, Herleitungsintuition und Prüfungsfallen</div>
+  <div class="rule"></div>
+  <div class="meta">
+    Basierend auf der offiziellen <strong>ET1_Formelsammlung</strong> (Institut für Elektromagnetische Felder)
+    und dem PVK-Kursmaterial. Gliederung folgt den 9 Kapiteln der Formelsammlung, ergänzt um
+    Intuitions-Erklärungen für die Stellen, an denen es in der Prüfung typischerweise hakt.<br><br>
+    Ergänzt das Skript und die Formelsammlung — ersetzt sie nicht.
+  </div>
+</div>
+
+<div class="toc">
+  <h2>Inhalt</h2>
+  <ol>
+    <li><a href="#c1"><span class="n">1</span> Das elektrostatische Feld</a></li>
+    <li><a href="#c2"><span class="n">2</span> Das stationäre elektrische Strömungsfeld</a></li>
+    <li><a href="#c3"><span class="n">3</span> Elektrische Netzwerke</a></li>
+    <li><a href="#c4"><span class="n">4</span> Das stationäre Magnetfeld</a></li>
+    <li><a href="#c5"><span class="n">5</span> Das zeitlich veränderliche elektromagnetische Feld</a></li>
+    <li><a href="#c6"><span class="n">6</span> Wechselstrom</a></li>
+    <li><a href="#c7"><span class="n">7</span> Halbleiter</a></li>
+    <li><a href="#c8"><span class="n">8</span> pn-Diode</a></li>
+    <li><a href="#c9"><span class="n">9</span> Aktive Bauelemente</a></li>
+    <li><a href="#c10"><span class="n">10</span> Konstanten</a></li>
+  </ol>
+</div>
+
+<section class="chapter" id="c1">
+<h2><span class="n">1</span>Das elektrostatische Feld</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 1–2</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">Coulomb'sches Gesetz</div>
+  $$\vec{F}_{12} = \frac{1}{4\pi\varepsilon_0}\frac{Q_1 Q_2}{|\vec{r}_{12}|^3}\vec{r}_{12}$$
+  <div class="vars"><b>F</b> Kraft von 1 auf 2 · <b>Q</b> Ladung [C] · skalar: $F=\frac{1}{4\pi\varepsilon_0}\frac{Q_1Q_2}{r^2}$</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Elektrisches Feld</div>
+  $$\vec{E} = \frac{\vec{F}}{Q}$$
+  <div class="vars">Kraft pro Probeladung — Eigenschaft des Raums, unabhängig davon ob dort eine Ladung sitzt.</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Ladungsverteilungen</div>
+  $$\rho=\frac{dQ}{dV}\quad \sigma=\frac{dQ}{dA}\quad \lambda=\frac{dQ}{dl}$$
+  <div class="vars">Raum-, Flächen-, Linienladungsdichte [C/m³], [C/m²], [C/m]</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Flussdichte &amp; Gauss'sches Gesetz</div>
+  $$\vec{D}=\varepsilon_r\varepsilon_0\vec{E} \qquad \oint_{\partial V}\vec{D}\cdot d\vec{A} = Q$$
+  <div class="vars">Differentialform: $\nabla\cdot\vec{D}=\rho$</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Randbedingungen</div>
+  $$\vec{E}_{t1}=\vec{E}_{t2} \qquad D_{n2}-D_{n1}=\sigma$$
+  <div class="vars">Tangentialkomponente von E stetig, Normalkomponente von D springt um die Flächenladung</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Kondensator</div>
+  $$C=\frac{Q}{U} \qquad C=\varepsilon_r\varepsilon_0\frac{A}{d}\ \text{(Platte)}$$
+  <div class="vars">[F] = [As/V]</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Serie / Parallel (Kondensatoren)</div>
+  $$C_{ser}^{-1}=\sum_k C_k^{-1} \qquad C_{par}=\sum_k C_k$$
+  <div class="vars">2 Kondensatoren: $C_{12}=\dfrac{C_1C_2}{C_1+C_2}$ — beachte: für C ist Serie wie Parallel bei R (und umgekehrt)!</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Energie im Kondensator</div>
+  $$W_e=\frac{1}{2}\frac{Q^2}{C}=\frac{1}{2}QU=\frac{1}{2}CU^2$$
+</div>
+</div>
+
+<div class="intuition">
+  <div class="lbl">Intuition — Feldlinien</div>
+  <p>Feldlinien sind keine physikalische Substanz, sondern eine Konstruktion: an jedem Punkt tangential zu $\vec E$, mit einer Dichte proportional zur Feldstärke. Sie beginnen an positiven Ladungen und enden an negativen (oder im Unendlichen) und kreuzen sich nie — an einem Punkt hat $\vec E$ nur eine Richtung. Ausnahme: Staupunkte, wo $E=0$.</p>
+</div>
+
+<div class="merke">
+  <div class="lbl">Merke — E vs. D</div>
+  <p>$\vec E$ hängt vom Material ab (via $\varepsilon_r$), $\vec D$ nicht — deshalb ist die Randbedingung für $\vec D$ (Normalkomponente) direkt an die freie Flächenladung $\sigma$ gekoppelt, während $\vec E_t$ material­unabhängig stetig bleibt. Bei einem Plattenkondensator mit zwei Dielektrika ist $D$ überall gleich, $E$ aber in jeder Schicht unterschiedlich.</p>
+</div>
+</section>
+
+<section class="chapter" id="c2">
+<h2><span class="n">2</span>Das stationäre elektrische Strömungsfeld</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 3</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">Elektrischer Strom</div>
+  $$I(t)=\frac{dQ}{dt} \qquad I=\iint_A \vec J\cdot d\vec A = \kappa\iint_A \vec E\cdot d\vec A$$
+  <div class="vars">$\kappa$ elektrische Leitfähigkeit [S/m]</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Stromdichte</div>
+  $$\vec J=\frac{\Delta I}{\Delta A}\hat e_v=\rho\vec v=e\cdot n\cdot \vec v \quad\text{(Konvektionsstrom)}$$
+  <div class="vars">$n$ Ladungsträgerdichte [1/m³]</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Verschiebungsstrom</div>
+  $$\vec J_v=\frac{d}{dt}\vec D$$
+</div>
+</div>
+
+<div class="intuition">
+  <div class="lbl">Intuition</div>
+  <p>Dieses Kapitel ist die Brücke zwischen dem elektrostatischen Feld (Kap. 1) und den Netzwerken (Kap. 3): dieselbe Feldbeschreibung, nur mit fliessenden statt ruhenden Ladungen. $\vec J = \kappa \vec E$ ist die lokale, feldbasierte Version des Ohm'schen Gesetzes $U=RI$ — daraus folgt der makroskopische Widerstand als Integral über die Geometrie.</p>
+</div>
+</section>
+
+<section class="chapter" id="c3">
+<h2><span class="n">3</span>Elektrische Netzwerke</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 4–7</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">Kirchhoff'sche Gleichungen</div>
+  $$\sum_{Knoten} I = 0 \qquad \sum_{Masche} U = 0$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Widerstandsnetze</div>
+  $$R_{ges}=\sum_k R_k \ \text{(Serie)} \qquad \frac{1}{R_{ges}}=\sum_k\frac{1}{R_k}\ \text{(Parallel)}$$
+  <div class="vars">2 parallele: $R_{ges}=R_1\|R_2=\dfrac{R_1R_2}{R_1+R_2}$ · $n$ gleiche parallele: $R_{ges}=R/n$</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Teiler</div>
+  $$\frac{U_2}{U}=\frac{R_2}{R_1+R_2}\ \text{(Spannung)} \qquad \frac{I_1}{I}=\frac{R_2}{R_1+R_2}=\frac{G_1}{G_1+G_2}\ \text{(Strom)}$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Dreieck ↔ Stern</div>
+  $$R_{1N}=\frac{R_{12}R_{31}}{R_{12}+R_{23}+R_{31}}\ \ (\text{zykl.}) \qquad R_{12}=R_{1N}+R_{2N}+\frac{R_{1N}R_{2N}}{R_{3N}}\ \ (\text{zykl.})$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Ideale Quellen</div>
+  <div class="vars"><b>Spannungsquelle:</b> $U$ konstant, $R_i=0$, unphysikalisch bei Kurzschluss.<br><b>Stromquelle:</b> $I$ konstant, $R_i=\infty$, unphysikalisch bei Leerlauf.</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Identische Quellen kombinieren</div>
+  <div class="vars">
+  <b>Serie:</b> $U_{0,n}=nU_0,\ I_{K,n}=I_K,\ R_{i,n}=nR_i$<br>
+  <b>Parallel:</b> $U_{0,n}=U_0,\ I_{K,n}=nI_K,\ R_{i,n}=R_i/n$
+  </div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Leistungsanpassung</div>
+  $$P_L=\left(\frac{U_0}{R_i+R_L}\right)^2 R_L \qquad P_{L,max}=\frac{U_0^2}{4R_i}\ \text{bei } R_L=R_i$$
+  <div class="vars">Wirkungsgrad Spannungsquelle: $\eta=\dfrac{R_L}{R_i+R_L}=\dfrac{U_L}{U_0}$ (bei Anpassung nur $\eta=50\%$!)</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Vorgehen: Maschenstromverfahren</div>
+  <div class="vars">
+  1) Zweigströme definieren · 2) unabhängige Maschen finden · 3) Maschenströme definieren ·
+  4) $I_i=\sum_n b_n I_{Mn}$, $b_n\in\{0,\pm1\}$ · 5) Maschengleichung $\sum U=0$ ·
+  6) Ohm'sches Gesetz einsetzen · 7) $R\vec I_M=\vec Q$ lösen · 8) Zweigströme zurückrechnen
+  </div>
+</div>
+</div>
+
+<div class="merke">
+  <div class="lbl">Merke — Vorzeichen</div>
+  <p>Sobald Umlaufsinn (Masche) und Richtungspfeile (Ströme) festgelegt sind, gelten sie für die ganze Rechnung. Ein negatives Ergebnis heisst: der reale Strom fliesst entgegen der angenommenen Richtung — kein Fehler. Bei $N$ Knoten sind nur $N-1$ Knotengleichungen unabhängig.</p>
+</div>
+
+<div class="intuition">
+  <div class="lbl">Intuition — Superposition</div>
+  <p>Die Gesamtlösung ist die lineare Summe der Teillösungen jeder einzelnen Quelle. Beim Ausschalten einer Quelle: Spannungsquellen werden zu einem Kurzschluss (0V, aber Innenwiderstand bleibt!), Stromquellen zu einer Unterbrechung (0A). $R_{parallel} < R_{min}$ gilt immer — ein zusätzlicher Widerstand parallel kann den Gesamtwiderstand nur verkleinern.</p>
+</div>
+
+<div class="example">
+  <div class="lbl">Beispiel — R1 in Serie zu R2‖R3</div>
+  Gegeben: $U_0=24\text{ V}$, $R_1=20\,\Omega$, $R_2=30\,\Omega$, $R_3=60\,\Omega$.
+  <ol>
+    <li>$R_p=\dfrac{R_2R_3}{R_2+R_3}=\dfrac{1800}{90}=20\,\Omega$</li>
+    <li>$R_{ges}=R_1+R_p=40\,\Omega$</li>
+    <li>$I_1=U_0/R_{ges}=0.6\text{ A}$, $U_{23}=I_1R_p=12\text{ V}$</li>
+    <li>$I_2=U_{23}/R_2=0.4\text{ A}$, $I_3=U_{23}/R_3=0.2\text{ A}$ (Probe: $I_2+I_3=I_1$ ✓)</li>
+  </ol>
+  <div class="res">Ergebnis: $I_1=0.6$ A, $I_2=0.4$ A, $I_3=0.2$ A</div>
+</div>
+</section>
+
+<section class="chapter" id="c4">
+<h2><span class="n">4</span>Das stationäre Magnetfeld</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 8–10</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">Lorentzkraft</div>
+  $$\vec F=q(\vec v\times\vec B) \qquad \vec F=I(\vec\ell\times\vec B)\ \text{(Leiter)}$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Durchflutungsgesetz (Oersted)</div>
+  $$\oint_C \vec H\cdot d\vec s=\sum_k I_k=:\Theta$$
+  <div class="vars">$\Theta$ Durchflutung [A], $\vec H$ magnetische Feldstärke [A/m]</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">B–H-Beziehung</div>
+  $$\vec B=\mu\vec H=\mu_0\vec H+\vec J \qquad \vec J=\mu_0(\mu_r-1)\vec H=\mu_0\chi\vec H$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Grenzflächen (magnetisch)</div>
+  $$B_{n1}=B_{n2} \qquad H_{t1}=H_{t2} \qquad \frac{B_{t1}}{B_{t2}}=\frac{\mu_1}{\mu_2}$$
+</div>
+</div>
+
+<div class="fbox">
+  <div class="fbox-title">Vorgehen: Magnetischer Kreis</div>
+  <div class="vars">
+  i) Knotenregel: $\sum \Phi_i=0$ &nbsp; ii) Maschenregel: $\Theta=\sum V_{mi}=\sum R_{mi}\Phi_i$ &nbsp;
+  iii) Ohm: $V_{m,i}=\Phi_i R_{m,i}$ &nbsp; iv) Durchflutung: $\Theta=\sum N_iI_i$ &nbsp;
+  v) Reluktanz: $R_{m,i}=\dfrac{l_i}{\mu_0\mu_{r,i}A_i}$ &nbsp; → nach gesuchter Grösse auflösen.
+  </div>
+  $$L=\frac{\Phi_V}{I}=\frac{N^2}{R_m} \qquad \Phi_V=N\Phi$$
+</div>
+
+<div class="intuition">
+  <div class="lbl">Intuition — Lorentzkraft verrichtet keine Arbeit</div>
+  <p>$\vec F$ steht immer senkrecht auf $\vec v$, ändert also nie den Betrag von $v$, nur die Richtung — daraus folgt eine Kreisbahn mit konstantem Radius, nie eine Spirale. $r=\dfrac{mv}{qB}$, und die Umlaufzeit $T=\dfrac{2\pi m}{qB}$ ist unabhängig von $v$ — das Funktionsprinzip des Zyklotrons. Bewegung parallel zu $B$ erzeugt keine Kraft.</p>
+</div>
+
+<div class="example">
+  <div class="lbl">Beispiel — Elektron im Magnetfeld</div>
+  $q=1.6\cdot10^{-19}\text{ C}$, $m=9.11\cdot10^{-31}\text{ kg}$, $v=2\cdot10^6\text{ m/s}$, $B=0.5\text{ T}$.
+  <ol>
+    <li>$r=\dfrac{mv}{qB}=\dfrac{9.11\cdot10^{-31}\cdot2\cdot10^6}{1.6\cdot10^{-19}\cdot0.5}\approx2.28\cdot10^{-5}\text{ m}$</li>
+    <li>$T=\dfrac{2\pi m}{qB}\approx7.15\cdot10^{-11}\text{ s}$</li>
+  </ol>
+  <div class="res">Ergebnis: $r\approx22.8\ \mu$m, $T\approx71.5$ ps</div>
+</div>
+</section>
+
+<section class="chapter" id="c5">
+<h2><span class="n">5</span>Das zeitlich veränderliche elektromagnetische Feld</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 11–12</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">Induktionsgesetz (Faraday)</div>
+  $$U=-\frac{d\Phi_V}{dt} \qquad \oint_C\vec E'\cdot d\vec s=-\frac{d}{dt}\iint_{A_V}\vec B\cdot d\vec A$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Lenz'sche Regel</div>
+  <div class="vars">Der induzierte Strom ist so gerichtet, dass er die Ursache seines Entstehens zu verhindern sucht.</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Induktivität</div>
+  $$u_L=L\frac{di}{dt}$$
+  <div class="vars">$L$ in Henry [H]. Serie: $L_{ges}=\sum L_k$ · Parallel: $1/L_{ges}=\sum 1/L_k$ (analog zu R!)</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Gegeninduktivität &amp; Kopplung</div>
+  $$L_{12}=\frac{\mu_0 l}{2\pi}\ln\!\left(\frac{bc}{ad}\right) \qquad k_{12}=\left|\frac{\Phi_{V12}}{\Phi_{V22}}\right|=\frac{M}{L_{22}}$$
+  <div class="vars">$k=\pm\sqrt{k_{12}k_{21}}$ · Streuung: $\sigma=1-k^2$</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Energieinhalt</div>
+  $$W_m=\frac{1}{2}LI^2=\frac{1}{2}\Phi_VI \qquad W_m=\frac{1}{2}\sum_i\sum_k L_{ik}I_iI_k\ \text{(gekoppelt)}$$
+</div>
+</div>
+
+<div class="intuition">
+  <div class="lbl">Intuition — zwei Wege den Fluss zu ändern</div>
+  <p>$U=-N\dfrac{d\Phi}{dt}$ gilt für <em>jede</em> Ursache: Bewegungsinduktion (Leiter bewegt sich im Feld, $u=Blv$) oder Ruheinduktion (Feld ändert sich, Leiter bleibt still — Transformatorprinzip). Beide liefern eine Spannung, aber mit völlig anderem Zeitverlauf. Kein Fluss ≠ keine induzierte Spannung möglich — entscheidend ist die <em>Änderungsrate</em>, nicht der Momentanwert. Der Transformator ist die praktische Anwendung von gekoppelten Spulen (oben): $U_2/U_1=N_2/N_1$, und im Idealfall (verlustfrei) $P_1=P_2$, also $I_2/I_1=N_1/N_2$ — mehr Windungen heisst mehr Spannung, aber automatisch weniger Strom.</p>
+</div>
+
+<div class="example">
+  <div class="lbl">Beispiel — Generator (rotierende Spule)</div>
+  $N=200$, $B=0.4\text{ T}$, $A=0.02\text{ m}^2$, $f=50\text{ Hz}$.
+  <ol>
+    <li>$\omega=2\pi f\approx314.16\text{ rad/s}$</li>
+    <li>$\hat u=NBA\omega\approx502.7\text{ V}$</li>
+    <li>$U_{eff}=\hat u/\sqrt2\approx355.5\text{ V}$</li>
+  </ol>
+  <div class="res">Ergebnis: $\hat u\approx502.7$ V, $U_{eff}\approx355.5$ V</div>
+</div>
+</section>
+
+<section class="chapter" id="c6">
+<h2><span class="n">6</span>Wechselstrom</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 13–16</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">Mittel- &amp; Effektivwert</div>
+  $$\bar u=\frac{1}{T}\int_{t_0}^{t_0+T}\! u(t)\,dt \qquad U_{eff}=\sqrt{\frac1T\int_{t_0}^{t_0+T}\! u^2(t)\,dt}$$
+  <div class="vars">Sinus: $U_{eff}=\hat u/\sqrt2$</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Komplexe Amplitude</div>
+  $$u(t)=\hat u\cos(\omega t+\varphi)=\mathrm{Re}\{\hat{\underline u}\cdot e^{j\omega t}\}$$
+  <div class="vars">$\hat u=\sqrt{\mathrm{Re}\{\hat{\underline u}\}^2+\mathrm{Im}\{\hat{\underline u}\}^2}$ · $\varphi=\tan^{-1}(\mathrm{Im}/\mathrm{Re})$</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Impedanz</div>
+  $$\hat{\underline u}=\underline Z\hat{\underline i} \qquad \underline Z_{ges}=\sum_k \underline Z_k\ (Serie) \qquad \frac{1}{\underline Z_{ges}}=\sum_k\frac{1}{\underline Z_k}\ (Parallel)$$
+  <div class="vars">$X_L=\omega L$ (eilt 90° voraus) · $X_C=1/(\omega C)$ (hinkt 90° hinterher)</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">RC-Filter</div>
+  $$\text{Tiefpass: } \frac{\hat{\underline u}_2}{\hat{\underline u}_1}=\frac{1}{j\omega RC+1} \qquad \text{Hochpass: } \frac{\hat{\underline u}_2}{\hat{\underline u}_1}=\frac{j\omega RC}{j\omega RC+1}$$
+  <div class="vars">$\omega_g=1/(RC)$, definiert über $|\hat u_2/\hat u_1|^2=1/2$ (also $-3$ dB, Faktor $1/\sqrt2$)</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">RLC-Serienschwingkreis</div>
+  $$\left|\frac{\hat{\underline u}_R}{\hat{\underline u}}\right|=\frac{R}{\sqrt{R^2+\left(\omega L-\frac{1}{\omega C}\right)^2}} \qquad \omega_0=\frac{1}{\sqrt{LC}}$$
+  <div class="vars">Güte $Q_s=\dfrac1R\sqrt{L/C}$ · Bandbreite $B=\dfrac{1}{2\pi}\dfrac RL=\dfrac{f_0}{Q_s}$</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Leistung</div>
+  $$S=\frac12\hat{\underline u}\,\hat{\underline i}^*=U_{eff}I_{eff} \qquad P=\mathrm{Re}\{S\}=U_{eff}I_{eff}\cos(\varphi_u-\varphi_i)$$
+  <div class="vars">$Q=\mathrm{Im}\{S\}=U_{eff}I_{eff}\sin(\varphi_u-\varphi_i)$ · Leistungsfaktor $\lambda=\cos(\varphi_u-\varphi_i)=P/S$</div>
+</div>
+</div>
+
+<div class="merke">
+  <div class="lbl">Merke — Vorgehen Netzwerkanalyse</div>
+  <p>1) Ersatzschaltbild → 2) mehrere Quellen via Superposition → 3) Zeit- in Frequenzraum, komplexe Impedanzen → 4) vereinfachen (Serie/Parallel, Maschen/Knoten, Teiler) → 5) Rücktransformation in Zeitbereich.</p>
+</div>
+
+<div class="intuition">
+  <div class="lbl">Intuition — Zeiger addieren sich vektoriell, nicht arithmetisch</div>
+  <p>$U_R+U_L+U_C\neq U_{ges}$ als Summe der Beträge — nur die vektorielle Summe stimmt, weil $u_L$ dem Strom 90° voraus­eilt und $u_C$ 90° hinterherhinkt. Bei Resonanz ($X_L=X_C$) heben sich $U_L$ und $U_C$ exakt auf, übrig bleibt nur $U_R=U_{ges}$ — der Strom ist maximal. Und: $-3$ dB heisst <em>nicht</em> „halbe Spannung" (das wären $-6$ dB) — Faktor $1/\sqrt2\approx0.71$ in der Spannung, aber $\tfrac12$ in der Leistung ($P\propto U^2$).</p>
+</div>
+
+<div class="example">
+  <div class="lbl">Beispiel — Serienimpedanz</div>
+  $R=50\,\Omega$, $L=100\text{ mH}$, $C=20\ \mu\text{F}$, $f=100\text{ Hz}$.
+  <ol>
+    <li>$\omega=2\pi f\approx628.3\text{ rad/s}$</li>
+    <li>$X_L=\omega L\approx62.83\,\Omega$, $X_C=1/(\omega C)\approx79.58\,\Omega$</li>
+    <li>$\underline Z=50+j(62.83-79.58)=50-j16.75\,\Omega$</li>
+    <li>$|Z|\approx52.7\,\Omega$, $\varphi\approx-18.5^\circ$ (kapazitiv, da $\varphi<0$)</li>
+  </ol>
+  <div class="res">Ergebnis: $|Z|\approx52.7\,\Omega$, $\varphi\approx-18.5^\circ$</div>
+</div>
+</section>
+
+<section class="chapter" id="c7">
+<h2><span class="n">7</span>Halbleiter</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 17–18</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">Bandlücke</div>
+  $$E_G=E_L-E_V \qquad 0.1\text{ eV} &lt; E_G &lt; 4\text{ eV (Halbleiter)}$$
+  <div class="vars">Si: $E_G\approx1.12$ eV · Ge: $E_G\approx0.66$ eV · $1$ eV $=1.602\cdot10^{-19}$ J</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Kinetische Energie / de Broglie</div>
+  $$E_{kin}=\frac12mv^2=\frac{p^2}{2m} \qquad p=\frac{h}{\lambda}=\hbar k$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Kontinuitätsgleichung</div>
+  $$\frac{\partial\rho}{\partial t}+\nabla\cdot\vec J=-e(g_n-r_n)+e(g_p-r_p)$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Elektronen-/Löcherstromdichte</div>
+  $$\vec J_n=e n\mu_n\vec E+eD_n\nabla n \qquad (\text{Drift + Diffusion})$$
+</div>
+</div>
+
+<div class="intuition">
+  <div class="lbl">Intuition — Dotierung</div>
+  <p>Donatoren (Gruppe V, z. B. P, As) bringen ein Elektron zu viel → n-Typ, Majoritätsträger sind Elektronen. Akzeptoren (Gruppe III, z. B. B) lassen eine Bindung offen → p-Typ, Majoritätsträger sind Löcher. Eselsbrücke: „p wie positiv, 1 Elektron weniger; n wie negativ, 1 Elektron mehr". Wichtig: das Kristallgitter bleibt in beiden Fällen elektrisch neutral — nur die Ladung der beweglichen Majoritätsträger unterscheidet sich.</p>
+</div>
+</section>
+
+<section class="chapter" id="c8">
+<h2><span class="n">8</span>pn-Diode</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 19</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">Diffusionsspannung</div>
+  $$U_D=\frac{k_BT}{e}\ln\!\left(\frac{n_Dn_A}{n_i^2}\right)$$
+</div>
+<div class="fbox">
+  <div class="fbox-title">Diodenkennlinie (Shockley)</div>
+  $$I=I_n+I_p=I_S\left(e^{\frac{eU}{k_BT}}-1\right)$$
+  <div class="vars">$U_T=k_BT/e\approx25.85$ mV bei 300 K</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Photodiode</div>
+  $$I_{PD}=I_L-I_S\left(e^{\frac{eU}{k_BT}}-1\right)$$
+</div>
+</div>
+
+<div class="merke">
+  <div class="lbl">Merke — 0.7 V ist eine Näherung</div>
+  <p>Die Kennlinie ist überall exponentiell, nicht nur ab 0.7 V — die Schwelle ist der Bereich, in dem der Strom von „vernachlässigbar" zu „mehrere zehn mA" explodiert. Auch in Sperrrichtung fliesst ein winziger Sättigungssperrstrom $I_S$; eine reale Diode sperrt nie absolut perfekt (bis zur Durchbruchspannung). Vorwärts- und Rückwärtsstrom unterscheiden sich um Grössenordnungen.</p>
+</div>
+
+<div class="example">
+  <div class="lbl">Beispiel — Diodenstrom</div>
+  $I_S=1\cdot10^{-12}$ A, $n=1$, $T=300$ K ($U_T\approx25.85$ mV), $U=0.6$ V.
+  <ol>
+    <li>$U/U_T=0.6/0.02585\approx23.21$</li>
+    <li>$I\approx I_S\cdot e^{23.21}\approx10^{-12}\cdot1.20\cdot10^{10}\approx0.0120$ A</li>
+  </ol>
+  <div class="res">Ergebnis: $I\approx12.0$ mA</div>
+</div>
+</section>
+
+<section class="chapter" id="c9">
+<h2><span class="n">9</span>Aktive Bauelemente</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 20</p>
+
+<div class="fgrid">
+<div class="fbox">
+  <div class="fbox-title">MOSFET (n-Typ)</div>
+  $$\text{Linear: } I_{DS}=\beta(V_{GS}-V_T)V_{DS} \qquad \text{Sättigung: } I_{DS}=\frac{\beta}{2}(V_{GS}-V_T)^2$$
+  <div class="vars">Anwendung: digitales Schaltelement, Verstärker. p-Typ analog mit vertauschten Vorzeichen/Polaritäten.</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">Zenerdiode</div>
+  <div class="vars">Anwendung: Schaltungsschutz. Charakteristik: definierter Durchbruch bei fester Spannung, Widerstand sackt danach auf sehr kleine Werte — hält die Spannung dort praktisch konstant.</div>
+</div>
+<div class="fbox">
+  <div class="fbox-title">LED &amp; Solarzelle</div>
+  <div class="vars">LED: normale pn-Diode, Rekombination erzeugt Licht statt Wärme.<br>
+  Solarzelle: $I=I_L-I_S\!\left(e^{eU/k_BT}-1\right)$ — wie Photodiode, aber als Energiequelle betrieben (Maximum Power Point).</div>
+</div>
+</div>
+
+<div class="intuition">
+  <div class="lbl">Intuition — MOSFET als spannungsgesteuerter Schalter</div>
+  <p>$V_{GS}$ steuert einen Kanal zwischen Drain und Source, ohne dass Gate-Strom fliesst (isoliertes Gate). Unterhalb $V_T$ (Schwellenspannung) sperrt der Kanal komplett. Im Linearbereich verhält sich der MOSFET wie ein spannungsgesteuerter Widerstand, in Sättigung wie eine spannungsgesteuerte Stromquelle — der Übergang zwischen beiden ist der Punkt $V_{DS}=V_{GS}-V_T$.</p>
+</div>
+</section>
+
+<section class="chapter" id="c10">
+<h2><span class="n">10</span>Konstanten</h2>
+<p class="chapter-intro">Formelsammlung ET I, S. 21</p>
+
+<table class="ktable">
+<thead><tr><th>Grösse</th><th>Symbol</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td>Elementarladung</td><td>$e$</td><td>$1.6\times10^{-19}$ C</td></tr>
+<tr><td>Vakuumpermittivität</td><td>$\varepsilon_0$</td><td>$8.85\times10^{-12}$ F/m</td></tr>
+<tr><td>Vakuumpermeabilität</td><td>$\mu_0$</td><td>$4\pi\times10^{-7}$ H/m $\approx1.26\times10^{-6}$ H/m</td></tr>
+<tr><td>Boltzmann-Konstante</td><td>$k_B$</td><td>$1.380\times10^{-23}$ J/K $=8.617\times10^{-5}$ eV/K</td></tr>
+<tr><td>Thermische Energie (300 K)</td><td>$k_BT$</td><td>$25.9$ meV $=4.14\times10^{-21}$ J</td></tr>
+</tbody>
+</table>
+
+<p class="note">Quelle: ET1_Formelsammlung_v3-2.pdf, Institut für Elektromagnetische Felder (IEF). Diese Zusammenfassung ergänzt das Skript und die Formelsammlung um Intuition und Prüfungsfallen — sie ersetzt keine der beiden.</p>
+</section>
+
+
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: "$$", right: "$$", display: true},
+      {left: "$", right: "$", display: false},
+      {left: "\\(", right: "\\)", display: false}
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elektrotechnik visuell &amp; interaktiv</title>
+<meta name="description" content="Interaktive Visualisierungen zu Elektrotechnik: Kirchhoffsche Regeln, RC-Glieder, Felder, Induktion, Wechselstrom und Filter.">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="#" style="display:block">
+        <div class="brand-title">Elektrotechnik</div>
+        <div class="brand-sub">visuell &amp; interaktiv</div>
+      </a>
+      <button id="theme-toggle" class="theme-toggle" type="button">☀️ Heller Modus</button>
+      <a id="polybox-link" class="theme-toggle" href="#" target="_blank" rel="noopener">📎 Polybox</a>
+    </div>
+    <nav id="sidebar-nav"></nav>
+  </aside>
+  <main class="content" id="content">
+    <div class="content-inner" id="content-inner"></div>
+  </main>
+</div>
+
+<script src="vendor/katex/katex.min.js"></script>
+<script src="polybox-link.js"></script>
+<script src="js/utils.js"></script>
+<script src="pages/kirchhoff.js"></script>
+<script src="pages/rc-glied.js"></script>
+<script src="pages/efeld.js"></script>
+<script src="pages/lorentzkraft.js"></script>
+<script src="pages/induktion.js"></script>
+<script src="pages/zeigerdiagramm.js"></script>
+<script src="pages/filter.js"></script>
+<script src="pages/transformator.js"></script>
+<script src="pages/halbleiter.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
