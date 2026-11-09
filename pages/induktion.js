@@ -9,7 +9,7 @@ window.PAGES.push({
   navTitle: 'Induktionsgesetz',
   title: 'Das Induktionsgesetz: zwei Wege, denselben Fluss zu ändern',
   subtitle: 'Egal ob sich der Leiter bewegt oder das Feld sich ändert — induziert wird immer nur eines: eine Änderung des magnetischen Flusses.',
-  teaser: 'Rotierende Spule und bewegter Leiterstab — zwei Induktionsmechanismen im Vergleich.',
+  teaser: 'Rotierende Spule und bewegter Leiterstab — zwei Induktionsmechanismen im Vergleich. Plus Prüfungsaufgabe FS 25 zum Durchspielen.',
 
   render(container) {
     container.appendChild(el('div', { class: 'callout warn' }, [
@@ -262,5 +262,8 @@ window.PAGES.push({
         el('li', {}, ['Bewegt sich ein Leiter parallel zu den Feldlinien statt sie zu schneiden, wird ', el('strong', {}, 'nichts'), ' induziert — nur die Komponente der Bewegung senkrecht zu B zählt.']),
       ]),
     ]));
+
+    // Prüfungsaufgabe FS 25 (c) — siehe pages/induktion-fs25.js
+    if (typeof renderInduktionFS25 === 'function') renderInduktionFS25(container);
   },
 });
